@@ -2,8 +2,8 @@ import { useState } from 'react';
 import VehicleCard from '../components/VehicleCard';
 import RentalFormModal from '../components/RentalFormModal';
 import Navbar from '../components/Navbar';
-import backgroundImage from '../assets/background1.png';
-import img from '../assets/car_example.png';
+import backgroundImage from '../assets/Images/background1.png';
+import img from '../assets/Images/car_example.png';
 import Footer from '../components/Footer';
 
 const categories = ['ALL', 'convertible', 'intermediate SUV', 'economy'];
