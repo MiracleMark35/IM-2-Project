@@ -1,10 +1,21 @@
 import { useState } from 'react';
 import VehicleCard from '../components/VehicleCard';
 import RentalFormModal from '../components/RentalFormModal';
-import Navbar from '../components/Navbar';
-import backgroundImage from '../assets/Images/background1.png';
+import backgroundImage from '../assets/Images/bg_rental.png';
 import img from '../assets/Images/car_example.png';
-import Footer from '../components/Footer';
+import img1 from '../assets/Images/a.png';
+import img2 from '../assets/Images/b.png';
+import img3 from '../assets/Images/c.png';
+
+// Import Swiper components and base styles
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+// Import the CSS file for this component
+import './RentalsPage.css';
 
 const categories = ['ALL', 'convertible', 'intermediate SUV', 'economy'];
 
@@ -15,7 +26,7 @@ const vehicles = [
     category: 'convertible',
     price: '₱130,000',
     frequency: 'Monthly',
-    image: img || 'https://via.placeholder.com/150',
+    image: img1 || 'https://via.placeholder.com/150',
   },
   {
     id: 2,
@@ -23,7 +34,7 @@ const vehicles = [
     category: 'intermediate SUV',
     price: '₱110,000',
     frequency: 'Monthly',
-    image: img || 'https://via.placeholder.com/150',
+    image: img2 || 'https://via.placeholder.com/150',
   },
   {
     id: 3,
@@ -31,13 +42,31 @@ const vehicles = [
     category: 'economy',
     price: '₱120,000',
     frequency: 'Monthly',
-    image: img || 'https://via.placeholder.com/150',
+    image: img3 || 'https://via.placeholder.com/150',
+  },
+  {
+    id: 4,
+    name: 'Toyota Vios',
+    category: 'economy',
+    price: '₱95,000',
+    frequency: 'Monthly',
+    image: img1 || 'https://via.placeholder.com/150',
+  },
+  {
+    id: 5,
+    name: 'Ford Mustang',
+    category: 'convertible',
+    price: '₱150,000',
+    frequency: 'Monthly',
+    image: img3 || 'https://via.placeholder.com/150',
   },
 ];
 
 export default function RentalsPage() {
   const [selectedCategory, setSelectedCategory] = useState('ALL');
   const [selectedVehicle, setSelectedVehicle] = useState(null);
+  
+  const [selectedDateRange, setSelectedDateRange] = useState('06/24 - 06/30');
 
   const filteredVehicles =
     selectedCategory === 'ALL'
@@ -46,18 +75,18 @@ export default function RentalsPage() {
 
   return (
     <div
-      className="min-h-screen bg-cover bg-center bg-black/60 bg-blend-darken text-white px-4 sm:px-8 pt-24 pb-10"
+      className="rentals-page"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="rentals-container">
         {/* Category Filter */}
-        <div className="w-full md:w-52 mb-6">
-          <div className="border border-gray-300 rounded-sm bg-white p-2 shadow-sm">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Select category
-            </label>
+        <div className="filter-container">
+          <label className="filter-label">
+            Select category
+          </label>
+          <div className="select-wrapper">
             <select
-              className="w-full text-black px-3 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="category-select"
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
             >
@@ -67,26 +96,65 @@ export default function RentalsPage() {
                 </option>
               ))}
             </select>
+            <div className="select-arrow">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+            </div>
           </div>
         </div>
 
-        {/* Vehicle Cards - Now below the filter */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredVehicles.map((vehicle) => (
-            <VehicleCard
-              key={vehicle.id}
-              vehicle={vehicle}
-              onRentClick={setSelectedVehicle}
-            />
-          ))}
+        {/* Vehicle Slider Wrapper */}
+        <div className="slider-wrapper">
+          <Swiper
+            modules={[Navigation, Pagination]}
+            spaceBetween={24}
+            slidesPerView={1}
+            navigation={{
+              nextEl: '.swiper-button-next-custom',
+              prevEl: '.swiper-button-prev-custom',
+            }}
+            pagination={{ clickable: true }}
+            breakpoints={{
+              768: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
+            }}
+            className="vehicle-slider"
+          >
+            {filteredVehicles.map((vehicle) => (
+              <SwiperSlide key={vehicle.id}>
+                <VehicleCard
+                  vehicle={vehicle}
+                  onRentClick={setSelectedVehicle}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          {/* Custom Navigation Arrows */}
+          <div className="swiper-button-prev-custom">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            </svg>
+          </div>
+          <div className="swiper-button-next-custom">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+          </div>
+        </div>
+
+        <div className="date-display-box">
+          SELECT CAR FOR DATE: {selectedDateRange}
         </div>
       </div>
 
-      {/* Rental Form Modal */}
+      {/* Pass the selectedDateRange to the modal */}
       <RentalFormModal
         vehicle={selectedVehicle}
         isOpen={selectedVehicle !== null}
         onClose={() => setSelectedVehicle(null)}
+        selectedDateRange={selectedDateRange}
       />
     </div>
   );

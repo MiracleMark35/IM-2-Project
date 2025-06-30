@@ -1,18 +1,20 @@
-// src/main.jsx
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import RentalsPage from './pages/RentalsPage'; // This is where you'll define your <Routes>
+import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Import Routes and Route
+import RentalsPage from './pages/RentalsPage';
 import './index.css';
 import Footer from './components/Footer';
-import Navbar from './components/Navbar';
+import Navbar from './components/nav'; // Ensure this matches your file structure
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <Navbar />
-      <RentalsPage />
+      <Routes>
+        <Route path="/" element={<RentalsPage />} /> {/* Define your routes here */}
+        {/* Add more routes as needed */}
+      </Routes>
       <Footer />
     </BrowserRouter>
   </StrictMode>
 );
-
