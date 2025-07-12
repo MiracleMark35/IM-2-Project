@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+
 
 const Login = () => {
   const [userID, setUserID] = useState('');
   const [passcode, setPasscode] = useState('');
+  const navigate = useNavigate(); // Initialize navigate function
 
   const handleSubmit = () => {
     if (!userID || !passcode) {
       alert('Please enter both User ID and Passcode.');
     } else {
-      alert(`Submitted!\nUser ID: ${userID}\nPasscode: ${passcode}`);
+      // Only require that some input exists, not specific values
+      navigate('/home'); // Redirect to home page
     }
   };
-
   const handleRedirect = (path) => {
     window.location.href = path;
   };
@@ -101,19 +104,7 @@ const Login = () => {
 
   return (
     <div style={styles.body}>
-      <nav style={styles.navbar}>
-        <div style={styles.leftNav}>
-          <div style={styles.logo}>Mc. <strong>IE</strong></div>
-          <ul style={styles.navLinks}>
-            <li style={styles.navLink} onClick={() => handleRedirect('/home')}>Home</li>
-            <li style={styles.navLink} onClick={() => handleRedirect('/rentals')}>Rentals</li>
-            <li style={styles.navLink} onClick={() => handleRedirect('/contacts')}>Contacts</li>
-          </ul>
-        </div>
-        <button style={styles.loginButton} onClick={() => alert('Navbar Login clicked')}>
-          Login
-        </button>
-      </nav>
+      
 
       <div style={styles.background}>
         <div style={styles.loginBox}>
