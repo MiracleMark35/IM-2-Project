@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import VehicleCard from '../components/VehicleCard';
 import RentalFormModal from '../components/RentalFormModal';
+import FilterDropdownButton from '../components/FilterDropdownButton';
+import VehicleDetailModal from '../components/VehicleDetailModal';
 import backgroundImage from '../assets/Images/bg_rental.png';
 import img from '../assets/Images/car_example.png';
 import img1 from '../assets/Images/a.png';
@@ -18,6 +20,7 @@ import 'swiper/css/pagination';
 import './RentalsPage.css';
 
 const categories = ['ALL', 'convertible', 'intermediate SUV', 'economy'];
+
 
 const vehicles = [
   {
@@ -65,7 +68,13 @@ const vehicles = [
 export default function RentalsPage() {
   const [selectedCategory, setSelectedCategory] = useState('ALL');
   const [selectedVehicle, setSelectedVehicle] = useState(null);
-  
+  const [detailModalVehicle, setDetailModalVehicle] = useState(null);
+  const [filters, setFilters] = useState({
+    paymentStatus: "Relevance",
+    transmission: "Any",
+    eco: "",
+  });
+
   const [selectedDateRange, setSelectedDateRange] = useState('06/24 - 06/30');
 
   const filteredVehicles =
@@ -85,11 +94,7 @@ export default function RentalsPage() {
             Select category
           </label>
           <div className="select-wrapper">
-            <select
-              className="category-select"
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-            >
+            <select className="category-select" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} >
               {categories.map((cat) => (
                 <option key={cat} value={cat}>
                   {cat}
@@ -102,6 +107,15 @@ export default function RentalsPage() {
               </svg>
             </div>
           </div>
+          <FilterDropdownButton
+            filters={filters}
+            setFilters={setFilters}
+            appliedCount={
+              Object.values(filters).filter(
+                v => v && v !== "Relevance" && v !== "Any"
+              ).length
+            }
+          />
         </div>
 
         {/* Vehicle Slider Wrapper */}
@@ -126,6 +140,7 @@ export default function RentalsPage() {
                 <VehicleCard
                   vehicle={vehicle}
                   onRentClick={setSelectedVehicle}
+                  onDetailClick={setDetailModalVehicle}
                 />
               </SwiperSlide>
             ))}
@@ -156,6 +171,14 @@ export default function RentalsPage() {
         onClose={() => setSelectedVehicle(null)}
         selectedDateRange={selectedDateRange}
       />
+
+      <VehicleDetailModal
+        vehicle={detailModalVehicle}
+        isOpen={!!detailModalVehicle}
+        onClose={() => setDetailModalVehicle(null)}
+      />
     </div>
+
+    
   );
 }
