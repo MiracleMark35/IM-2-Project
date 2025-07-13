@@ -37,6 +37,28 @@
   }
 }
 
+
+.filter-container {
+  width: 100%;
+  margin-bottom: 24px;
+  overflow: hidden; /* Clearfix */
+}
+
+.select-wrapper {
+  position: relative;
+  float: left;
+  width: 208px;
+  margin-right: 16px;
+}
+
+/* Clear floats */
+.filter-container:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+
 .filter-label {
   display: block;
   font-size: 14px; /* 0.875rem */

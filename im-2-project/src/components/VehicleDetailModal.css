@@ -1,0 +1,227 @@
+.vehicle-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(8px);
+}
+
+.vehicle-modal-popup {
+  background: #151514;
+  color: #FFE2A2;
+  border-radius: 1.5rem;
+  padding: 1rem 2rem;
+  max-width: 1100px;
+  width: 90vw;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+.vehicle-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 2.5rem;
+  background: none;
+  border: none;
+  color: #FFE2A2;
+  font-size: 1.5rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.vehicle-modal-grid {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.vehicle-modal-info {
+  flex: 2;
+}
+
+.vehicle-modal-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0rem;
+  color: #FFE2A2;
+}
+
+.vehicle-modal-price-block {
+  text-align: right;
+  margin-top: -3.5rem;
+  margin-bottom: 2rem;
+}
+
+.vehicle-modal-price {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #FFE2A2;
+  display: block;
+}
+
+.vehicle-modal-price-unit {
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.vehicle-modal-monthly {
+  font-size: 0.95rem;
+  color: #bfae8a;
+  margin-top: 0.2rem;
+}
+
+.vehicle-modal-section {
+  margin-top: 2rem;
+}
+
+.vehicle-modal-section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #FFE2A2;
+  margin-bottom: 0.5rem;
+}
+
+.vehicle-modal-section-desc {
+  color: #fffbe8;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.vehicle-modal-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  margin-top: 1rem;
+}
+
+.vehicle-modal-features > div {
+  min-width: 180px;
+}
+
+.vehicle-modal-feature-cat {
+  font-weight: 600;
+  color: #FFE2A2;
+  margin-bottom: 0.2rem;
+}
+
+.vehicle-modal-features ul {
+  margin: 0.5rem 0 0 1rem;
+  padding: 0;
+  color: #fffbe8;
+  font-size: 1rem;
+}
+
+.vehicle-modal-image-col {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.vehicle-modal-image-box {
+  background: #393733;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vehicle-modal-image-box img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  object-fit: contain;
+}
+
+.vehicle-modal-icons {
+  display: flex;
+  gap: 2rem;
+  margin: 1.5rem 0 1rem 0;
+  font-size: 1.1rem;
+  color: #bfc9e0;
+}
+
+.vehicle-modal-icons i {
+  margin-right: 0.5rem;
+}
+
+.vehicle-modal-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1.5rem;
+}
+
+.vehicle-modal-rating .stars {
+  color: #FFD700;
+  font-size: 1.3rem;
+}
+
+.vehicle-modal-rating .review-count {
+  color: #bfc9e0;
+  font-size: 1rem;
+}
+
+.vehicle-modal-actions {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.vehicle-modal-action {
+  background: #232b3b;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  color: #bfc9e0;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.vehicle-modal-action:hover {
+  background: #445280;
+}
+
+@media (max-width: 900px) {
+  .vehicle-modal-grid {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .vehicle-modal-price-block {
+    text-align: left;
+    margin-top: 0;
+  }
+}
+
+.vehicle-modal-icons {
+  display: flex;
+  gap: 2rem;
+  margin: 1.5rem 0 1rem 0;
+  font-size: 1.1rem;
+  color: #bfc9e0;
+}
+
+.icon-text {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1.2em;
+  height: 1.2em;
+  margin-right: 0.3em;
+}
