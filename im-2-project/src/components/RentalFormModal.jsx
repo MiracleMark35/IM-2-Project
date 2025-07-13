@@ -1,4 +1,4 @@
-import './RentalFormModal.css';
+import '../styles/RentalFormModal.css';
 
 export default function RentalFormModal({ vehicle, isOpen, onClose, selectedDateRange }) {
   if (!isOpen || !vehicle) return null;

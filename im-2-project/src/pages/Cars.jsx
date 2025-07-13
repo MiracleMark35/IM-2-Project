@@ -2,9 +2,11 @@ import { useState } from 'react';
 import VehicleCard from '../components/VehicleCard';
 import RentalFormModal from '../components/RentalFormModal';
 import backgroundImage from '../assets/Images/bg_rental.png';
+import img from '../assets/Images/car_example.png';
 import img1 from '../assets/Images/a.png';
 import img2 from '../assets/Images/b.png';
 import img3 from '../assets/Images/c.png';
+import CarDetails from '../components/CarDetails';
 
 // Import Swiper components and base styles
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -14,7 +16,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 // Import the CSS file for this component
-import './RentalsPage.css';
+import '../styles/Cars.css';
 
 const categories = ['ALL', 'convertible', 'intermediate SUV', 'economy'];
 
@@ -25,7 +27,7 @@ const vehicles = [
     category: 'convertible',
     price: '₱130,000',
     frequency: 'Monthly',
-    image: img1 || 'https://via.placeholder.com/150',
+    image: img1 ,
   },
   {
     id: 2,
@@ -33,7 +35,7 @@ const vehicles = [
     category: 'intermediate SUV',
     price: '₱110,000',
     frequency: 'Monthly',
-    image: img2 || 'https://via.placeholder.com/150',
+    image: img2 ,
   },
   {
     id: 3,
@@ -41,7 +43,7 @@ const vehicles = [
     category: 'economy',
     price: '₱120,000',
     frequency: 'Monthly',
-    image: img3 || 'https://via.placeholder.com/150',
+    image: img3 ,
   },
   {
     id: 4,
@@ -49,7 +51,7 @@ const vehicles = [
     category: 'economy',
     price: '₱95,000',
     frequency: 'Monthly',
-    image: img1 || 'https://via.placeholder.com/150',
+    image: img1,
   },
   {
     id: 5,
@@ -57,14 +59,16 @@ const vehicles = [
     category: 'convertible',
     price: '₱150,000',
     frequency: 'Monthly',
-    image: img3 || 'https://via.placeholder.com/150',
+    image: img3 ,
   },
 ];
 
 export default function RentalsPage() {
   const [selectedCategory, setSelectedCategory] = useState('ALL');
   const [selectedVehicle, setSelectedVehicle] = useState(null);
-  
+  const [selectedDateRange, setSelectedDateRange] = useState('06/24 - 06/30');
+  const [showDetails, setShowDetails] = useState(false);
+  const [detailsVehicle, setDetailsVehicle] = useState(null);
 
   const filteredVehicles =
     selectedCategory === 'ALL'
@@ -77,8 +81,30 @@ export default function RentalsPage() {
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <div className="rentals-container">
-        {/* REMOVED Category Filter */}
-        
+        {/* Category Filter */}
+        <div className="filter-container">
+          <label className="filter-label">
+            Select category
+          </label>
+          <div className="select-wrapper">
+            <select
+              className="category-select"
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+              {categories.map((cat) => (
+                <option key={cat} value={cat}>
+                  {cat}
+                </option>
+              ))}
+            </select>
+            <div className="select-arrow">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+            </div>
+          </div>
+        </div>
 
         {/* Vehicle Slider Wrapper */}
         <div className="slider-wrapper">
@@ -102,6 +128,10 @@ export default function RentalsPage() {
                 <VehicleCard
                   vehicle={vehicle}
                   onRentClick={setSelectedVehicle}
+                  onCardClick={(vehicle) => {
+                    setDetailsVehicle(vehicle);
+                    setShowDetails(true);
+                  }}
                 />
               </SwiperSlide>
             ))}
@@ -125,8 +155,20 @@ export default function RentalsPage() {
         </div>
       </div>
 
-      {/* REMOVED Pass the selectedDateRange to the modal */}
-      
+      {/* Car Details Modal */}
+      <CarDetails
+        vehicle={detailsVehicle}
+        isOpen={showDetails}
+        onClose={() => setShowDetails(false)}
+      />
+
+      {/* Rental Form Modal */}
+      <RentalFormModal
+        vehicle={selectedVehicle}
+        isOpen={selectedVehicle !== null}
+        onClose={() => setSelectedVehicle(null)}
+        selectedDateRange={selectedDateRange}
+      />
     </div>
   );
 }

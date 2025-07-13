@@ -1,9 +1,8 @@
-import './VehicleCard.css';
+import '../styles/VehicleCard.css';
 
-export default function VehicleCard({ vehicle, onRentClick }) {
+export default function VehicleCard({ vehicle, onRentClick, onCardClick }) {
   return (
-    <div className="vehicle-card">
-      {/* 1. Wrap image in a container to add the gray background */}
+    <div className="vehicle-card" onClick={() => onCardClick(vehicle)}>
       <div className="vehicle-image-container">
         <img
           src={vehicle.image}
@@ -16,7 +15,10 @@ export default function VehicleCard({ vehicle, onRentClick }) {
         <div className="vehicle-card-header">
           <h2 className="vehicle-name">{vehicle.name}</h2>
           <button
-            onClick={() => onRentClick(vehicle)}
+            onClick={(e) => {
+              e.stopPropagation(); // Prevent card click from triggering
+              onRentClick(vehicle);
+            }}
             className="rent-button"
           >
             +
@@ -25,7 +27,6 @@ export default function VehicleCard({ vehicle, onRentClick }) {
 
         <p className="vehicle-category">{vehicle.category}</p>
 
-        {/* 2. Add the "daily" option to match the image */}
         <div className="vehicle-options">
           <p>• weekly</p>
           <p>• daily</p>

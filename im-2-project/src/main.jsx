@@ -1,12 +1,17 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import RentalsPage from './pages/RentalsPage';
+import Cars from './pages/Cars';
 import './index.css';
 import Footer from './components/Footer';
 import Navbar from './components/nav';
 import Login from './pages/Login';
 import Home from './pages/Home';
+import Featured from './pages/Featured';
+import AboutUs from './pages/AboutUs';
+import ContactPage from './pages/ContactPage';
+import BookingsPage from './pages/BookingsPage';
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -23,12 +28,45 @@ createRoot(document.getElementById('root')).render(
             <Footer />
           </>
         } />
-        
-        {/* Rentals page (with Navbar & Footer) */}
-        <Route path="/rentals" element={
+         {/* Home page (with Navbar & Footer) */}
+        <Route path="/featured" element={
           <>
             <Navbar />
-            <RentalsPage />
+            <Featured />
+            <Footer />
+          </>
+        } />
+        {/* Home page (with Navbar & Footer) */}
+        <Route path="/booking" element={
+          <>
+            <Navbar />
+            <BookingsPage />
+            <Footer />
+          </>
+        } />
+          {/* Home page (with Navbar & Footer) */}
+        <Route path="/contact" element={
+          <>
+            <Navbar />
+            <ContactPage />
+            <Footer />
+          </>
+        } />
+
+         {/* Home page (with Navbar & Footer) */}
+        <Route path="/aboutus" element={
+          <>
+            <Navbar />
+            <AboutUs />
+            <Footer />
+          </>
+        } />
+        
+        {/* Rentals page (with Navbar & Footer) */}
+        <Route path="/car" element={
+          <>
+            <Navbar />
+            <Cars />
             <Footer />
           </>
         } />

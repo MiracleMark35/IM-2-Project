@@ -7,6 +7,11 @@
   flex-direction: column;
   color: #FFE2A2;
   height: 100%;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.vehicle-card:hover {
+  transform: translateY(-5px);
 }
 
 /* New: Container for the image to add a background color */
@@ -58,6 +63,8 @@
   border: none;
   cursor: pointer;
   line-height: 1;
+   cursor: pointer;
+  z-index: 2; /* Ensure button stays above the card */
 }
 
 .rent-button:hover {
