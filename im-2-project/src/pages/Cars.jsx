@@ -4,24 +4,21 @@ import RentalFormModal from '../components/RentalFormModal';
 import FilterDropdownButton from '../components/FilterDropdownButton';
 import VehicleDetailModal from '../components/VehicleDetailModal';
 import backgroundImage from '../assets/Images/bg_rental.png';
-import img from '../assets/Images/car_example.png';
 import img1 from '../assets/Images/a.png';
 import img2 from '../assets/Images/b.png';
 import img3 from '../assets/Images/c.png';
 import CarDetails from '../components/CarDetails';
 
-// Import Swiper components and base styles
+// Swiper components and styles
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-// Import the CSS file for this component
 import '../styles/Cars.css';
 
 const categories = ['ALL', 'convertible', 'intermediate SUV', 'economy'];
-
 
 const vehicles = [
   {
@@ -30,7 +27,7 @@ const vehicles = [
     category: 'convertible',
     price: '₱130,000',
     frequency: 'Monthly',
-    image: img1 ,
+    image: img1,
   },
   {
     id: 2,
@@ -38,7 +35,7 @@ const vehicles = [
     category: 'intermediate SUV',
     price: '₱110,000',
     frequency: 'Monthly',
-    image: img2 ,
+    image: img2,
   },
   {
     id: 3,
@@ -46,7 +43,7 @@ const vehicles = [
     category: 'economy',
     price: '₱120,000',
     frequency: 'Monthly',
-    image: img3 ,
+    image: img3,
   },
   {
     id: 4,
@@ -62,13 +59,19 @@ const vehicles = [
     category: 'convertible',
     price: '₱150,000',
     frequency: 'Monthly',
-    image: img3 ,
+    image: img3,
   },
 ];
 
 export default function RentalsPage() {
   const [selectedCategory, setSelectedCategory] = useState('ALL');
   const [selectedVehicle, setSelectedVehicle] = useState(null);
+  const [detailModalVehicle, setDetailModalVehicle] = useState(null);
+  const [filters, setFilters] = useState({
+    paymentStatus: 'Relevance',
+    transmission: 'Any',
+    eco: '',
+  });
   const [selectedDateRange, setSelectedDateRange] = useState('06/24 - 06/30');
   const [showDetails, setShowDetails] = useState(false);
   const [detailsVehicle, setDetailsVehicle] = useState(null);
@@ -86,11 +89,13 @@ export default function RentalsPage() {
       <div className="rentals-container">
         {/* Category Filter */}
         <div className="filter-container">
-          <label className="filter-label">
-            Select category
-          </label>
+          <label className="filter-label">Select category</label>
           <div className="select-wrapper">
-            <select className="category-select" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} >
+            <select
+              className="category-select"
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
               {categories.map((cat) => (
                 <option key={cat} value={cat}>
                   {cat}
@@ -98,8 +103,16 @@ export default function RentalsPage() {
               ))}
             </select>
             <div className="select-arrow">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                />
               </svg>
             </div>
           </div>
@@ -108,7 +121,7 @@ export default function RentalsPage() {
             setFilters={setFilters}
             appliedCount={
               Object.values(filters).filter(
-                v => v && v !== "Relevance" && v !== "Any"
+                (v) => v && v !== 'Relevance' && v !== 'Any'
               ).length
             }
           />
@@ -140,6 +153,7 @@ export default function RentalsPage() {
                     setDetailsVehicle(vehicle);
                     setShowDetails(true);
                   }}
+                  onDetailClick={setDetailModalVehicle}
                 />
               </SwiperSlide>
             ))}
@@ -147,13 +161,33 @@ export default function RentalsPage() {
 
           {/* Custom Navigation Arrows */}
           <div className="swiper-button-prev-custom">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2.5}
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15.75 19.5L8.25 12l7.5-7.5"
+              />
             </svg>
           </div>
           <div className="swiper-button-next-custom">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2.5}
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M8.25 4.5l7.5 7.5-7.5 7.5"
+              />
             </svg>
           </div>
         </div>
@@ -178,13 +212,12 @@ export default function RentalsPage() {
         selectedDateRange={selectedDateRange}
       />
 
+      {/* Vehicle Detail Modal */}
       <VehicleDetailModal
         vehicle={detailModalVehicle}
         isOpen={!!detailModalVehicle}
         onClose={() => setDetailModalVehicle(null)}
       />
     </div>
-
-    
   );
 }
