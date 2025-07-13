@@ -5,13 +5,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0,0,0,0.25);
+  background: rgba(78, 60, 46, 0.6);
   backdrop-filter: blur(8px);
 }
 
 .vehicle-modal-popup {
-  background: #151514;
-  color: #FFE2A2;
+  background: #EDE3D5;
+  color: #937B60;
   border-radius: 1.5rem;
   padding: 1rem 2rem;
   max-width: 1100px;
@@ -26,7 +26,7 @@
   right: 2.5rem;
   background: none;
   border: none;
-  color: #FFE2A2;
+  color: #937B60;
   font-size: 1.5rem;
   cursor: pointer;
   font-weight: bold;
@@ -45,7 +45,7 @@
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 0rem;
-  color: #FFE2A2;
+  color: #937B60;
 }
 
 .vehicle-modal-price-block {
@@ -57,7 +57,7 @@
 .vehicle-modal-price {
   font-size: 2rem;
   font-weight: 600;
-  color: #FFE2A2;
+  color: #937B60;
   display: block;
 }
 
@@ -68,7 +68,7 @@
 
 .vehicle-modal-monthly {
   font-size: 0.95rem;
-  color: #bfae8a;
+  color: #937B60;
   margin-top: 0.2rem;
 }
 
@@ -79,12 +79,12 @@
 .vehicle-modal-section-title {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #FFE2A2;
+  color: #937B60;
   margin-bottom: 0.5rem;
 }
 
 .vehicle-modal-section-desc {
-  color: #fffbe8;
+  color: #3b3b3a;
   font-size: 1rem;
   line-height: 1.5;
 }
@@ -102,14 +102,14 @@
 
 .vehicle-modal-feature-cat {
   font-weight: 600;
-  color: #FFE2A2;
+  color: #937B60;
   margin-bottom: 0.2rem;
 }
 
 .vehicle-modal-features ul {
   margin: 0.5rem 0 0 1rem;
   padding: 0;
-  color: #fffbe8;
+  color: #3b3b3a;
   font-size: 1rem;
 }
 
@@ -123,7 +123,6 @@
 .vehicle-modal-image-box {
   background: #393733;
   border-radius: 1rem;
-  padding: 1rem;
   margin-bottom: 1.5rem;
   width: 100%;
   max-width: 400px;
@@ -144,7 +143,7 @@
   gap: 2rem;
   margin: 1.5rem 0 1rem 0;
   font-size: 1.1rem;
-  color: #bfc9e0;
+  color: #3b3b3a;
 }
 
 .vehicle-modal-icons i {
@@ -164,7 +163,7 @@
 }
 
 .vehicle-modal-rating .review-count {
-  color: #bfc9e0;
+  color: #3b3b3a;
   font-size: 1rem;
 }
 
@@ -175,12 +174,12 @@
 }
 
 .vehicle-modal-action {
-  background: #232b3b;
+  background: #937B60;
   border: none;
   border-radius: 50%;
   width: 48px;
   height: 48px;
-  color: #bfc9e0;
+  color: #f0f4ff;
   font-size: 1.5rem;
   display: flex;
   align-items: center;
@@ -190,7 +189,7 @@
 }
 
 .vehicle-modal-action:hover {
-  background: #445280;
+  background: #725e48;
 }
 
 @media (max-width: 900px) {
@@ -209,7 +208,7 @@
   gap: 2rem;
   margin: 1.5rem 0 1rem 0;
   font-size: 1.1rem;
-  color: #bfc9e0;
+  color: #595756;
 }
 
 .icon-text {

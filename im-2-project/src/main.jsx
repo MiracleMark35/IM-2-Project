@@ -10,7 +10,7 @@ import Home from './pages/Home';
 import Featured from './pages/Featured';
 import AboutUs from './pages/AboutUs';
 import ContactPage from './pages/ContactPage';
-import BookingsPage from './pages/BookingsPage';
+import RentalsPage from './pages/RentalsPage';
 
 
 createRoot(document.getElementById('root')).render(
@@ -36,11 +36,11 @@ createRoot(document.getElementById('root')).render(
             <Footer />
           </>
         } />
-        {/* Home page (with Navbar & Footer) */}
-        <Route path="/booking" element={
+        {/* Rentals page (with Navbar & Footer) */}
+        <Route path="/rentals" element={
           <>
             <Navbar />
-            <BookingsPage />
+            <RentalsPage />
             <Footer />
           </>
         } />
