@@ -8,11 +8,13 @@ import car from '../assets/Images/car.png';
 const slides = [
   {
     image: img1,
-    text: "Your trusted partner for travel, business, and special events."
+    text: "Your trusted partner for travel, business, and special events.",
+    subtext: "Experience luxury like never before"
   },
   {
     image: img2,
-    text: "Take a look at how our vehicles have been featured in movies, TV shoots, and exclusive projects."
+    text: "Take a look at how our vehicles have been featured in movies, TV shoots, and exclusive projects.",
+    subtext: "Hollywood-grade luxury fleet"
   }
 ];
 
@@ -34,7 +36,7 @@ const Home = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
-    }, 5000);
+    }, 6000);
     return () => clearTimeout(timer);
   }, [current]);
 
@@ -46,6 +48,7 @@ const Home = () => {
 
   return (
     <div className="home-bg">
+      {/* Enhanced Slideshow */}
       <div className="slider">
         {slides.map((slide, idx) => (
           <div
@@ -54,10 +57,15 @@ const Home = () => {
             style={{ backgroundImage: `url(${slide.image})` }}
           >
             <div className="slide-overlay">
-              <div className="slide-text">{slide.text}</div>
+              <div className="slide-content">
+                <h1 className="slide-title">{slide.text}</h1>
+                <p className="slide-subtitle">{slide.subtext}</p>
+                
+              </div>
             </div>
           </div>
         ))}
+        
         <div className="slider-dots">
           {slides.map((_, idx) => (
             <span
@@ -127,11 +135,6 @@ const Home = () => {
                 alt="Luxury Sports Car" 
                 className="car-image"
               />
-              <div className="car-slider-dots">
-                <span className="car-dot active"></span>
-                <span className="car-dot"></span>
-                <span className="car-dot"></span>
-              </div>
             </div>
           </div>
         </div>
@@ -152,13 +155,52 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Third Section Placeholder */}
-      <section className="third-section">
-        <div className="third-section-content">
-          <h2>Third Section</h2>
-          <p>This is a placeholder for the third section content.</p>
-        </div>
-      </section>
+      {/* Third Section - Our Services */}
+        <section className="third-section">
+          <div className="third-section-content">
+            <div className="services-layout">
+              <div className="car-services-display">
+                <div className="services-bg-circle-dark"></div>
+                <div className="services-bg-circle-gold"></div>
+                <img 
+                  src={car} 
+                  alt="Luxury Convertible Car" 
+                  className="services-car-image"
+                />
+              </div>
+              
+              <div className="services-content">
+                <h2 className="services-title">Our Services</h2>
+                <div className="services-list">
+                  <div className="service-item">
+                    <div className="service-bullet"></div>
+                    <div className="service-text">
+                      <h3>Car Hire</h3>
+                      <p>We pride ourselves in always going the extra mile for our customers.</p>
+                    </div>
+                  </div>
+                  
+                  <div className="service-item">
+                    <div className="service-bullet"></div>
+                    <div className="service-text">
+                      <h3>Car Sales</h3>
+                      <p>we sale the best luxury cars across the world at a competitive price.</p>
+                    </div>
+                  </div>
+                  
+                  <div className="service-item">
+                    <div className="service-bullet"></div>
+                    <div className="service-text">
+                      <h3>Hire a driver</h3>
+                      <p>you want to travel and fell comfortable, our drivers are available.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
     </div>
   );
 };
