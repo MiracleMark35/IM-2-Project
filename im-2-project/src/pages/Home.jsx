@@ -151,7 +151,7 @@ const Home = () => {
               all we need is your ID and you can book any car.
             </p>
           </div>
-          <button className="floating-cta-btn">Check Our Cars</button>
+          <button className="floating-cta-btn">Check Out Our Cars</button>
         </div>
       </div>
 
