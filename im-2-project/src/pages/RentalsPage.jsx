@@ -1,174 +1,113 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import VehicleCard from '../components/VehicleCard';
 import RentalFormModal from '../components/RentalFormModal';
 import FilterDropdownButton from '../components/FilterDropdownButton';
 import VehicleDetailModal from '../components/VehicleDetailModal';
 import backgroundImage from '../assets/Images/bg_rental.png';
-import img from '../assets/Images/car_example.png';
-import img1 from '../assets/Images/a.png';
-import img2 from '../assets/Images/b.png';
-import img3 from '../assets/Images/c.png';
-
-// Import Swiper components and base styles
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-
-import '../styles/RentalsPage.css'
-
-const categories = ['ALL', 'convertible', 'intermediate SUV', 'economy'];
-
-
-const vehicles = [
-  {
-    id: 1,
-    name: 'Mazda MX-5',
-    category: 'convertible',
-    price: '₱130,000',
-    frequency: 'Monthly',
-    image: img1 || 'https://via.placeholder.com/150',
-  },
-  {
-    id: 2,
-    name: 'Hyundai Santa Fe',
-    category: 'intermediate SUV',
-    price: '₱110,000',
-    frequency: 'Monthly',
-    image: img2 || 'https://via.placeholder.com/150',
-  },
-  {
-    id: 3,
-    name: 'Hyundai Elantra',
-    category: 'economy',
-    price: '₱120,000',
-    frequency: 'Monthly',
-    image: img3 || 'https://via.placeholder.com/150',
-  },
-  {
-    id: 4,
-    name: 'Toyota Vios',
-    category: 'economy',
-    price: '₱95,000',
-    frequency: 'Monthly',
-    image: img1 || 'https://via.placeholder.com/150',
-  },
-  {
-    id: 5,
-    name: 'Ford Mustang',
-    category: 'convertible',
-    price: '₱150,000',
-    frequency: 'Monthly',
-    image: img3 || 'https://via.placeholder.com/150',
-  },
-];
+import '../styles/RentalsPage.css';
+import { API_BASE_URL } from '../api/apiConfig'; // ✅ Ensure API_BASE_URL is imported
 
 export default function RentalsPage() {
+  const [vehicles, setVehicles] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('ALL');
+  const [filters, setFilters] = useState({
+    sortBy: 'Relevance',
+    transmission: '',
+    eco: '',
+    seats: ''
+  });
   const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [detailModalVehicle, setDetailModalVehicle] = useState(null);
-  const [filters, setFilters] = useState({
-    paymentStatus: "Relevance",
-    transmission: "Any",
-    eco: "",
+
+ useEffect(() => {
+  const fetchCars = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/cars/available.php`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ location: 'main_branch' }) // adjust if needed
+      });
+
+      const result = await response.json();
+
+      if (result.status === 'success') {
+        setVehicles(result.cars);
+        localStorage.setItem('availableCars', JSON.stringify(result.cars)); // optional cache
+      } else {
+        console.error('Fetch failed:', result.message);
+      }
+    } catch (err) {
+      console.error('Error fetching cars:', err);
+    }
+  };
+
+  fetchCars();
+}, []);
+ const filtered = vehicles
+  .filter(v => selectedCategory === 'ALL' || v.type === selectedCategory.toLowerCase())
+  .filter(v =>
+    (!filters.transmission || v.transmission.toLowerCase() === filters.transmission.toLowerCase()) &&
+    (!filters.eco || v.fuel_type.toLowerCase() === filters.eco.toLowerCase()) &&
+    (!filters.seats || (
+      filters.seats === '8 or more'
+        ? v.seats >= 8
+        : v.seats === parseInt(filters.seats)
+    ))
+  )
+  .sort((a, b) => {
+    if (filters.sortBy === 'price: low to high') return a.price - b.price;
+    if (filters.sortBy === 'high to low') return b.price - a.price;
+    return 0; // Default to Relevance (no sorting)
   });
 
-  const [selectedDateRange, setSelectedDateRange] = useState('06/24 - 06/30');
-
-  const filteredVehicles =
-    selectedCategory === 'ALL'
-      ? vehicles
-      : vehicles.filter((v) => v.category === selectedCategory);
-
   return (
-    <div
-      className="rentals-page"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
-    >
+    <div className="rentals-page" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <div className="rentals-container">
-        {/* Category Filter */}
         <div className="filter-container">
-          <label className="filter-label">
-            Select category
-          </label>
-          <div className="select-wrapper">
-            <select className="category-select" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} >
-              {categories.map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
-            <div className="select-arrow">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
-            </div>
-          </div>
-          <FilterDropdownButton
-            filters={filters}
-            setFilters={setFilters}
-            appliedCount={
-              Object.values(filters).filter(
-                v => v && v !== "Relevance" && v !== "Any"
-              ).length
-            }
-          />
-        </div>
-
-        {/* Vehicle Slider Wrapper */}
-        <div className="slider-wrapper">
-          <Swiper
-            modules={[Navigation, Pagination]}
-            spaceBetween={24}
-            slidesPerView={1}
-            navigation={{
-              nextEl: '.swiper-button-next-custom',
-              prevEl: '.swiper-button-prev-custom',
-            }}
-            pagination={{ clickable: true }}
-            breakpoints={{
-              768: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-            }}
-            className="vehicle-slider"
-          >
-            {filteredVehicles.map((vehicle) => (
-              <SwiperSlide key={vehicle.id}>
-                <VehicleCard
-                  vehicle={vehicle}
-                  onRentClick={setSelectedVehicle}
-                  onDetailClick={setDetailModalVehicle}
-                />
-              </SwiperSlide>
+          <label>Select category</label>
+          <select value={selectedCategory} onChange={e => setSelectedCategory(e.target.value)}>
+            {['ALL', ...[...new Set(vehicles.map(v => v.type))].map(t => t.toUpperCase())].map(c => (
+              <option key={c} value={c}>{c}</option>
             ))}
-          </Swiper>
-
-          {/* Custom Navigation Arrows */}
-          <div className="swiper-button-prev-custom">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-            </svg>
-          </div>
-          <div className="swiper-button-next-custom">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-            </svg>
-          </div>
+          </select>
+          <FilterDropdownButton filters={filters} setFilters={setFilters} />
         </div>
 
-        <div className="date-display-box">
-          SELECT CAR FOR DATE: {selectedDateRange}
-        </div>
+  <div className="slider-wrapper">
+  {filtered.map(vehicle => (
+    <VehicleCard
+      key={vehicle.id}
+      vehicle={{
+        id: vehicle.id,
+        name: vehicle.name,
+        make: vehicle.make,
+        year: vehicle.year,
+        plate_number: vehicle.plate_number,
+        category: vehicle.type,
+        price: `₱${vehicle.price}`,
+         transmission: vehicle.transmission,   // ✅ add this
+    fuel_type: vehicle.fuel_type,         // ✅ add this
+    seats: vehicle.seats,      
+        frequency: 'Per day',
+       image: `http://localhost/car-rental-api/uploads/cars/${vehicle.image_path}`
+
+
+// FULL image URL
+      }}
+      onRentClick={setSelectedVehicle}
+      onDetailClick={setDetailModalVehicle}
+    />
+  ))}
+</div>
       </div>
 
-      {/* Pass the selectedDateRange to the modal */}
       <RentalFormModal
         vehicle={selectedVehicle}
-        isOpen={selectedVehicle !== null}
+        isOpen={!!selectedVehicle}
         onClose={() => setSelectedVehicle(null)}
-        selectedDateRange={selectedDateRange}
+        selectedDateRange={`${localStorage.getItem('fromDate')} - ${localStorage.getItem('toDate')}`}
       />
 
       <VehicleDetailModal
@@ -177,7 +116,5 @@ export default function RentalsPage() {
         onClose={() => setDetailModalVehicle(null)}
       />
     </div>
-
-    
   );
 }

@@ -10,28 +10,34 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
-    if (!email || !password) {
-      setError('Please enter both email and password.');
-      return;
-    }
+  if (!email || !password) {
+    setError('Please enter both email and password.');
+    return;
+  }
 
-    try {
-      const response = await fetch(`${API_BASE_URL}/auth/login.php`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
+  try {
+    const response = await fetch(`${API_BASE_URL}/auth/login.php`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
 
-      const data = await response.json();
+    const data = await response.json();
 
-      if (!response.ok) throw new Error(data.error || 'Login failed');
+    if (!response.ok) throw new Error(data.error || 'Login failed');
 
-      alert('Login successful!');
-      navigate('/home');
-    } catch (err) {
-      setError(err.message);
-    }
-  };
+    // Store user data in localStorage
+    localStorage.setItem('id', data.user.id || '');
+    localStorage.setItem('userFullName', data.user.fullName || '');
+    localStorage.setItem('userEmail', data.user.email || '');
+    localStorage.setItem('userPhone', data.user.phone || '');
+    
+
+    navigate('/home');
+  } catch (err) {
+    setError(err.message);
+  }
+};
 
   return (
     <div className="login-container">

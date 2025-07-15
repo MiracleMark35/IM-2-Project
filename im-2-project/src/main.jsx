@@ -1,7 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Cars from './pages/Cars';
 import './index.css';
 import Footer from './components/Footer';
 import Navbar from './components/nav';
@@ -11,6 +10,8 @@ import Featured from './pages/Featured';
 import AboutUs from './pages/AboutUs';
 import RentalsPage from './pages/RentalsPage';
 import Register from './pages/Register';
+import Bookings from './pages/Bookings';
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -52,15 +53,16 @@ createRoot(document.getElementById('root')).render(
             <Footer />
           </>
         } />
-        
-        {/* Rentals page (with Navbar & Footer) */}
-        <Route path="/car" element={
+         {/* Home page (with Navbar & Footer) */}
+        <Route path="/booking" element={
           <>
             <Navbar />
-            <Cars />
+            <Bookings />
             <Footer />
           </>
         } />
+        
+       
       </Routes>
     </BrowserRouter>
   </StrictMode>

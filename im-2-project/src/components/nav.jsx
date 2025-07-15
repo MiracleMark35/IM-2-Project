@@ -1,10 +1,19 @@
 import React, { useState } from 'react';
 import '../styles/nav.css'; 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // ✅ Added useNavigate
 import ProfileIcon from '../assets/Images/profile-icon.png';
 
 const Navbar = () => {
     const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+    const navigate = useNavigate(); // ✅ Initialize navigate
+
+    const handleLogout = () => {
+        localStorage.removeItem('userId');
+        localStorage.removeItem('userFullName');
+        localStorage.removeItem('userEmail');
+        localStorage.removeItem('userPhone');
+        navigate('/'); // ✅ Avoid full page reload
+    };
 
     return (
         <nav className="navbar">
@@ -15,7 +24,7 @@ const Navbar = () => {
                 <div className="navbar-links">
                     <Link to="/home">Home</Link>
                     <Link to="/featured">Featured</Link>
-                    <Link to="/rentals">Bookings</Link>
+                    <Link to="/rentals">Rentals</Link>
                     <Link to="/aboutus">About us</Link>
                 </div>
                 <div className="profile-section">
@@ -33,15 +42,15 @@ const Navbar = () => {
                             <div className="dropdown-item">
                                 <Link to="/account">Account</Link>
                             </div>
-                            <div className="dropdown-item">
-                                <Link to="/logout">Log out</Link>
+                            <div className="dropdown-item" onClick={handleLogout}>
+                                Logout
                             </div>
                             <div className="dropdown-divider"></div>
                             <div className="dropdown-item">
-                                <Link to="/available-cars">View Available Cars</Link>
+                                <Link to="/rentals">View Available Cars</Link>
                             </div>
                             <div className="dropdown-item">
-                                <Link to="/bookings">View Bookings</Link>
+                                <Link to="/booking">View Bookings</Link>
                             </div>
                         </div>
                     )}
