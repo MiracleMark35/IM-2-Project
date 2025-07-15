@@ -11,6 +11,9 @@ import AboutUs from './pages/AboutUs';
 import RentalsPage from './pages/RentalsPage';
 import Register from './pages/Register';
 import Bookings from './pages/Bookings';
+import Account from './pages/Account';
+import Profile from './pages/Profile';
+
 
 
 createRoot(document.getElementById('root')).render(
@@ -33,6 +36,21 @@ createRoot(document.getElementById('root')).render(
           <>
             <Navbar />
             <Featured />
+            <Footer />
+          </>
+        } />
+         {/* Home page (with Navbar & Footer) */}
+        <Route path="/profile" element={
+          <>
+            <Navbar />
+            <Profile />
+            <Footer />
+          </>
+        } />
+        <Route path="/account" element={
+          <>
+            <Navbar />
+            <Account />
             <Footer />
           </>
         } />

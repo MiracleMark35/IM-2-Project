@@ -1,0 +1,49 @@
+.profile-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: sans-serif;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.profile-photo img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+}
+
+.profile-info h2 {
+  margin: 0;
+}
+
+.profile-verification {
+  margin-top: 2rem;
+}
+
+.profile-verification ul {
+  list-style: none;
+  padding: 0;
+}
+
+.profile-verification li {
+  margin: 0.5rem 0;
+}
+
+.profile-reviews {
+  margin-top: 2rem;
+  border-top: 1px solid #ddd;
+  padding-top: 1rem;
+}
+
+.tip-text {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 0.5rem;
+}

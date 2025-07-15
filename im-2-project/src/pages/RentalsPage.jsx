@@ -5,7 +5,7 @@ import FilterDropdownButton from '../components/FilterDropdownButton';
 import VehicleDetailModal from '../components/VehicleDetailModal';
 import backgroundImage from '../assets/Images/bg_rental.png';
 import '../styles/RentalsPage.css';
-import { API_BASE_URL } from '../api/apiConfig'; // ✅ Ensure API_BASE_URL is imported
+import { API_BASE_URL } from '../api/apiConfig'; 
 import { useLocation } from 'react-router-dom';
 import VehicleTypeFilter from '../components/VehicleTypeFilter';
 import '../components/VehicleTypeFilter.css';
