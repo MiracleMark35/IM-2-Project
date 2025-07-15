@@ -1,11 +1,11 @@
 .navbar {
-    background-color: #fff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #EDE3D5;
     padding: 1rem 2rem;
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
+    box-shadow: none;
 }
 
 .navbar-container {
@@ -19,42 +19,50 @@
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
+    color: #52402C;
 }
 
 .highlight {
-    color: #b9a1f1;
+    color: #52402C;
 }
 
 .navbar-links {
     display: flex;
     gap: 2rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .navbar-links a {
     text-decoration: none;
-    color: #333;
-    font-weight: 500;
+    color: #52402C;
+    font-weight: 400;
     transition: color 0.3s;
 }
 
 .navbar-links a:hover {
-    color: #b9a1f1;
+    color: #52402C;
+    opacity: 0.7;
 }
 
 .profile-section {
     position: relative;
+    margin-left: auto;
 }
 
-.profile-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
+.profile-button {
+    background-color: #B8A082;
+    color: #52402C;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-weight: 500;
     cursor: pointer;
-    transition: transform 0.3s;
+    transition: background-color 0.3s;
 }
 
-.profile-icon:hover {
-    transform: scale(1.1);
+.profile-button:hover {
+    background-color: #A69377;
 }
 
 .profile-dropdown {

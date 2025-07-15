@@ -1,4 +1,4 @@
-import '../styles/RentalFormModal.css';
+import './RentalFormModal.css';
 
 export default function RentalFormModal({ vehicle, isOpen, onClose, selectedDateRange }) {
   if (!isOpen || !vehicle) return null;
@@ -6,7 +6,7 @@ export default function RentalFormModal({ vehicle, isOpen, onClose, selectedDate
   // Helper function to convert "MM/DD" to "YYYY-MM-DD" format
   const formatToYyyyMmDd = (mmDdStr) => {
     if (!mmDdStr) return '';
-    const currentYear = new Date().getFullYear(); // Assumes the current year
+    const currentYear = new Date().getFullYear();
     const [month, day] = mmDdStr.split('/');
     return `${currentYear}-${month}-${day}`;
   };

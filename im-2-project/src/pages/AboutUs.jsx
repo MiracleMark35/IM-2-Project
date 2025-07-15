@@ -1,97 +1,286 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import '../styles/AboutUs.css';
 
 const AboutUsPage = () => {
+  const observerRef = useRef(null);
+
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    elements.forEach((el) => observerRef.current.observe(el));
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+  }, []);
+
   return (
     <div className="about-us-container">
       {/* Hero Section */}
       <section className="hero-section">
-        <h1>About Us</h1>
-        <h2>Where every drive feels extraordinary</h2>
-      </section>
-
-      {/* Features Section */}
-      <section className="features-section">
-        <div className="feature-card">
-          <h3>Variety Brands</h3>
-          <p>Focus now under tremendous individuality. Right adjusting against a spare mileage across current visitors too.</p>
+        <div className="hero-background">
+          <div className="hero-overlay"></div>
         </div>
-        
-        <div className="feature-card">
-          <h3>Maximum Freedom</h3>
-          <p>Dare spare gracious athletes will shift consistent images for 65 square graders will showcase natural visibility in.</p>
-        </div>
-        
-        <div className="feature-card">
-          <h3>Awesome Support</h3>
-          <p>This definitely shows an overall visionary reality across visitors too. One more gracious athletes will!</p>
-        </div>
-        
-        <div className="feature-card">
-          <h3>Flexibility On The Go</h3>
-          <p>What profits in this job span is that simple, 'We can profit with the full standard network, such as digital and secure platforms just so!</p>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="stats-section">
-        <div className="stat-item">
-          <h4>20k+</h4>
-          <p>Happy customers</p>
-        </div>
-        <div className="stat-item">
-          <h4>540+</h4>
-          <p>Count of cars</p>
-        </div>
-        <div className="stat-item">
-          <h4>25+</h4>
-          <p>Years of experience</p>
-        </div>
-      </section>
-
-      {/* Unlock Section */}
-      <section className="unlock-section">
-        <h2>Unlock unforgettable memories on the road</h2>
-        <p>AUGUST 2020 and every other campus include a new live online portal for training at provide. Our current immersive ground classrooms.</p>
-        
-        <div className="app-section">
-          <div className="app-info">
-            <p>Visit campus media layout and</p>
-            <h3>Download our app</h3>
-            <p>Explore mobile apps and pictures for all kinds. Placebo options unique other rooms different in diverse settings inside with respective fields and applicants have indicated it is true.</p>
+        <div className="hero-content">
+          <div className="hero-text">
             
-            <div className="app-buttons">
-              <button className="app-store-btn">App Store</button>
-              <button className="google-play-btn">Google Play</button>
+            <h1>
+              Your Trusted Partner for 
+              <span className="highlight-text"> Long-Term </span>
+              Car Rentals
+            </h1>
+            <p>
+              We specialize in affordable, long-term car rentals—not short trips. 
+              Whether you need a car for a month or more, we make it easy, flexible, 
+              and cost-effective. Our rates are consistently lower than traditional 
+              rental companies, without hidden fees or unnecessary upsells.
+            </p>
+            <div className="hero-buttons">
+              <button className="btn-primary">
+                <span>Get Started</span>
+                <i className="btn-icon">→</i>
+              </button>
+              <button className="btn-secondary">
+                <span>Learn More</span>
+                <i className="btn-icon">📖</i>
+              </button>
+            </div>
+          </div>
+          <div className="hero-image">
+            <div className="car-showcase">
+              <div className="car-main">
+                <div className="car-icon">🚗</div>
+                <div className="car-glow"></div>
+              </div>
+              <div className="floating-elements">
+                <div className="float-element float-1">⚡</div>
+                <div className="float-element float-2">💰</div>
+                <div className="float-element float-3">🔧</div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Reviews Section */}
-      <section className="reviews-section">
-        <h2>Reviews from our customers</h2>
-        
-        <div className="review-cards">
-          <div className="review-card">
-            <div className="rating">66</div>
-            <h4>Efficient action at explain</h4>
-            <p>Power connections within each Quam secure info runs widened performance model over digitisation time phasechat enim matrix.</p>
-            <p className="reviewer">Erasmus Bayle</p>
+      {/* Why Long-Term Section */}
+      <section className="why-longterm-section animate-on-scroll">
+        <div className="section-container">
+          <div className="section-header">
+            <span className="section-subtitle">The Smart Choice</span>
+            <h2>Why Long-Term Rentals?</h2>
+            <div className="section-divider"></div>
+          </div>
+          <div className="longterm-content">
+            <div className="longterm-text">
+              <p>
+                Traditional rentals charge daily rates that add up fast. Our platform is built 
+                for drivers who need more time behind the wheel—remote workers, students, travelers, 
+                or anyone between cars. The longer you rent, the more you save.
+              </p>
+              <div className="savings-highlight">
+                <div className="savings-icon">💡</div>
+                <div className="savings-text">
+                  <strong>Pro Tip:</strong> Save up to 60% compared to daily rentals
+                </div>
+              </div>
+            </div>
+            <div className="longterm-visual">
+              <div className="comparison-chart">
+                <div className="chart-item traditional">
+                  <div className="chart-bar"></div>
+                  <span>Traditional</span>
+                </div>
+                <div className="chart-item longterm">
+                  <div className="chart-bar"></div>
+                  <span>Long-term</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="features-section animate-on-scroll">
+        <div className="section-container">
+          <div className="section-header">
+            <span className="section-subtitle">Our Promise</span>
+            <h2>Simple, Transparent, Flexible</h2>
+            <p>No confusing terms. No surprise charges. Just honest car rentals.</p>
+            <div className="section-divider"></div>
           </div>
           
-          <div className="review-card">
-            <div className="rating">66</div>
-            <h4>Power connections within each</h4>
-            <p>Sem fields. 95 egetical images in quizzes materials. After start voluptate thickness. A short run: egetical limited-edition can salient magics.</p>
-            <p className="reviewer">River Green</p>
+          <div className="features-grid">
+            <div className="feature-card">
+              <div className="feature-icon-wrapper">
+                <div className="feature-icon">⚡</div>
+                <div className="icon-bg"></div>
+              </div>
+              <h3>Book in Minutes</h3>
+              <p>Quick and easy booking process with instant confirmation</p>
+              <div className="feature-arrow">→</div>
+            </div>
+            
+            <div className="feature-card">
+              <div className="feature-icon-wrapper">
+                <div className="feature-icon">💳</div>
+                <div className="icon-bg"></div>
+              </div>
+              <h3>Flat Monthly Rates</h3>
+              <p>Predictable pricing with no hidden fees or surprises</p>
+              <div className="feature-arrow">→</div>
+            </div>
+            
+            <div className="feature-card">
+              <div className="feature-icon-wrapper">
+                <div className="feature-icon">🔄</div>
+                <div className="icon-bg"></div>
+              </div>
+              <h3>Extend Anytime</h3>
+              <p>Flexible rental periods that adapt to your changing needs</p>
+              <div className="feature-arrow">→</div>
+            </div>
+            
+            <div className="feature-card">
+              <div className="feature-icon-wrapper">
+                <div className="feature-icon">✨</div>
+                <div className="icon-bg"></div>
+              </div>
+              <h3>Return Easily</h3>
+              <p>Hassle-free return process when you're ready</p>
+              <div className="feature-arrow">→</div>
+            </div>
           </div>
-          
-          <div className="review-card">
-            <div className="rating">66</div>
-            <h4>Quam secure info runs widened</h4>
-            <p>Options color print, single files in direction of your inner legacies field now kept air pelletioned grande negue and adipidonic lights pratique et</p>
-            <p className="reviewer">Anonymous</p>
+        </div>
+      </section>
+
+      {/* Drive Smarter Section */}
+      <section className="drive-smarter-section animate-on-scroll">
+        <div className="section-container">
+          <div className="drive-smarter-content">
+            <div className="drive-smarter-text">
+              <h2>Drive Smarter, Not Harder</h2>
+              <p>
+                Skip the high prices and time limits of short-term rentals.
+                <br />
+                <strong>Drive longer. Pay less. Live better.</strong>
+              </p>
+              <div className="benefits-list">
+                <div className="benefit-item">
+                  <span className="benefit-icon">✓</span>
+                  <span>No daily rate stress</span>
+                </div>
+                <div className="benefit-item">
+                  <span className="benefit-icon">✓</span>
+                  <span>Predictable monthly costs</span>
+                </div>
+                <div className="benefit-item">
+                  <span className="benefit-icon">✓</span>
+                  <span>Better long-term value</span>
+                </div>
+              </div>
+            </div>
+            
+            <div className="cars-showcase">
+              <div className="car-carousel">
+                <div className="car-item luxury">
+                  <div className="car-emoji">🚙</div>
+                  <span>SUV</span>
+                </div>
+                <div className="car-item featured">
+                  <div className="car-emoji">🚗</div>
+                  <span>Sedan</span>
+                </div>
+                <div className="car-item compact">
+                  <div className="car-emoji">🚘</div>
+                  <span>Compact</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="stats-section animate-on-scroll">
+        <div className="section-container">
+          <div className="stats-grid">
+            <div className="stat-card">
+              <div className="stat-icon">📊</div>
+              <div className="stat-number">50%</div>
+              <div className="stat-label">Lower rates than traditional rentals</div>
+              <div className="stat-description">Average savings per month</div>
+            </div>
+            <div className="stat-card">
+              <div className="stat-icon">📅</div>
+              <div className="stat-number">30+</div>
+              <div className="stat-label">Day minimum rental periods</div>
+              <div className="stat-description">Flexible long-term options</div>
+            </div>
+            <div className="stat-card">
+              <div className="stat-icon">🕐</div>
+              <div className="stat-number">24/7</div>
+              <div className="stat-label">Customer support available</div>
+              <div className="stat-description">Always here to help</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="cta-section animate-on-scroll">
+        <div className="section-container">
+          <div className="cta-content">
+            <div className="cta-text">
+              <h2>Ready to Get Started?</h2>
+              <p>
+                Join thousands of drivers who choose long-term rentals for 
+                better rates and more flexibility. Get your car today and 
+                experience the difference.
+              </p>
+              <div className="cta-features">
+                <div className="cta-feature">
+                  <span className="cta-feature-icon">🚀</span>
+                  <span>Instant booking</span>
+                </div>
+                <div className="cta-feature">
+                  <span className="cta-feature-icon">💰</span>
+                  <span>Best prices guaranteed</span>
+                </div>
+                <div className="cta-feature">
+                  <span className="cta-feature-icon">🔒</span>
+                  <span>Secure & trusted</span>
+                </div>
+              </div>
+            </div>
+            <div className="cta-visual">
+              <div className="cta-icon-wrapper">
+                <div className="cta-icon">👋</div>
+                <div className="cta-pulse"></div>
+              </div>
+            </div>
+          </div>
+          <div className="cta-buttons">
+            <button className="cta-button primary">
+              <span>Start Your Rental</span>
+              <i className="btn-icon">🚗</i>
+            </button>
+            <button className="cta-button secondary">
+              <span>Contact Us</span>
+              <i className="btn-icon">📞</i>
+            </button>
           </div>
         </div>
       </section>

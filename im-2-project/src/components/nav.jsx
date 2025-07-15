@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/nav.css'; 
 import { Link } from 'react-router-dom';
-import ProfileIcon from '../assets/Images/profile-icon.png'; // You'll provide this
+import ProfileIcon from '../assets/Images/profile-icon.png';
 
 const Navbar = () => {
     const [showProfileDropdown, setShowProfileDropdown] = useState(false);
@@ -15,17 +15,16 @@ const Navbar = () => {
                 <div className="navbar-links">
                     <Link to="/home">Home</Link>
                     <Link to="/featured">Featured</Link>
-                    <Link to="/booking">Bookings</Link>
-                    <Link to="/contact">Contacts</Link>
+                    <Link to="/rentals">Bookings</Link>
                     <Link to="/aboutus">About us</Link>
                 </div>
                 <div className="profile-section">
-                    <img 
-                        src={ProfileIcon} 
-                        alt="Profile" 
-                        className="profile-icon"
+                    <div 
+                        className="profile-button"
                         onClick={() => setShowProfileDropdown(!showProfileDropdown)}
-                    />
+                    >
+                        Profile
+                    </div>
                     {showProfileDropdown && (
                         <div className="profile-dropdown">
                             <div className="dropdown-header">
