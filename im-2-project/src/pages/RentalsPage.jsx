@@ -6,16 +6,24 @@ import VehicleDetailModal from '../components/VehicleDetailModal';
 import backgroundImage from '../assets/Images/bg_rental.png';
 import '../styles/RentalsPage.css';
 import { API_BASE_URL } from '../api/apiConfig'; // ✅ Ensure API_BASE_URL is imported
+import { useLocation } from 'react-router-dom';
+import VehicleTypeFilter from '../components/VehicleTypeFilter';
+import '../components/VehicleTypeFilter.css';
 
 export default function RentalsPage() {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const defaultType = queryParams.get('type') || 'ALL';
   const [vehicles, setVehicles] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('ALL');
-  const [filters, setFilters] = useState({
-    sortBy: 'Relevance',
-    transmission: '',
-    eco: '',
-    seats: ''
-  });
+const [selectedCategory, setSelectedCategory] = useState(defaultType.toUpperCase());
+ const [filters, setFilters] = useState({
+  sortBy: 'Relevance',
+  transmission: '',
+  eco: '',
+  seats: '',
+  type: ''
+});
+
   const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [detailModalVehicle, setDetailModalVehicle] = useState(null);
 
@@ -46,7 +54,10 @@ export default function RentalsPage() {
   fetchCars();
 }, []);
  const filtered = vehicles
-  .filter(v => selectedCategory === 'ALL' || v.type === selectedCategory.toLowerCase())
+  .filter(v =>
+    (selectedCategory === 'ALL' || v.type === selectedCategory.toLowerCase()) &&
+    (!filters.type || v.type === filters.type)
+  )
   .filter(v =>
     (!filters.transmission || v.transmission.toLowerCase() === filters.transmission.toLowerCase()) &&
     (!filters.eco || v.fuel_type.toLowerCase() === filters.eco.toLowerCase()) &&
@@ -66,7 +77,11 @@ export default function RentalsPage() {
     <div className="rentals-page" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <div className="rentals-container">
         <div className="filter-container">
-          <label>Select category</label>
+          <VehicleTypeFilter 
+  selectedType={selectedCategory}
+  setSelectedType={setSelectedCategory}
+/>
+
           <select value={selectedCategory} onChange={e => setSelectedCategory(e.target.value)}>
             {['ALL', ...[...new Set(vehicles.map(v => v.type))].map(t => t.toUpperCase())].map(c => (
               <option key={c} value={c}>{c}</option>

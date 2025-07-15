@@ -1,0 +1,28 @@
+.vehicle-type-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.type-btn {
+  padding: 8px 16px;
+  border: 1px solid #d2a14d;
+  background-color: white;
+  color: #333;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.type-btn:hover {
+  background-color: #d2a14d;
+  color: white;
+}
+
+.type-btn.active {
+  background-color: #d2a14d;
+  color: white;
+  font-weight: bold;
+}
