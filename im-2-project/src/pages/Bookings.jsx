@@ -127,7 +127,13 @@ export default function Bookings() {
                   <FaMapMarkerAlt /><span>{b.pickup_location}</span>
                 </div>
                 <div className="detail">
-                  <FaMoneyBillWave /><span>₱{Number(b.total_price).toFixed(2)}</span>
+                  <FaMoneyBillWave />
+<span>
+  ₱{(
+    (b.car_price || 0) *
+    (Math.ceil((new Date(b.end_date) - new Date(b.start_date)) / (1000 * 60 * 60 * 24)) || 1)
+  ).toFixed(2)}
+</span>
                 </div>
               </div>
 

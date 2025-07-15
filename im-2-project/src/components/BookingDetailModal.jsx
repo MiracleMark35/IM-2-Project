@@ -1,6 +1,14 @@
 import React from 'react';
 import './BookingDetailModal.css';
-import { FaCalendarAlt, FaMapMarkerAlt, FaMoneyBillWave, FaCar, FaUserFriends, FaGasPump, FaCogs } from 'react-icons/fa';
+import {
+  FaCalendarAlt,
+  FaMapMarkerAlt,
+  FaMoneyBillWave,
+  FaCar,
+  FaUserFriends,
+  FaGasPump,
+  FaCogs
+} from 'react-icons/fa';
 
 export default function BookingDetailModal({ booking, isOpen, onClose }) {
   if (!isOpen || !booking) return null;
@@ -24,7 +32,13 @@ export default function BookingDetailModal({ booking, isOpen, onClose }) {
               <FaMapMarkerAlt /> Pickup: {booking.pickup_location}
             </div>
             <div className="section">
-              <FaMoneyBillWave /> Total: ₱{Number(booking.total_price).toFixed(2)}
+              <FaMoneyBillWave />
+<span>
+  ₱{(
+    (b.car_price || 0) *
+    (Math.ceil((new Date(b.end_date) - new Date(b.start_date)) / (1000 * 60 * 60 * 24)) || 1)
+  ).toFixed(2)}
+</span>
             </div>
             <div className="section">
               <strong>Status:</strong> {booking.booking_status}
@@ -32,6 +46,13 @@ export default function BookingDetailModal({ booking, isOpen, onClose }) {
             <div className="section">
               <strong>Payment Method:</strong> {booking.payment_method || 'N/A'}
             </div>
+
+            {booking.description && (
+              <div className="section">
+                <strong>Description:</strong>
+                <p className="car-description">{booking.description}</p>
+              </div>
+            )}
           </div>
 
           <div className="right-image">
