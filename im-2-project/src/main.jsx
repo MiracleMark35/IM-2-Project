@@ -10,7 +10,7 @@ import Home from './pages/Home';
 import Featured from './pages/Featured';
 import AboutUs from './pages/AboutUs';
 import RentalsPage from './pages/RentalsPage';
-
+import Register from './pages/Register';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -18,7 +18,7 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         {/* Login page (standalone) */}
         <Route path="/" element={<Login />} />
-        
+        <Route path ='/register' element={<Register />} />
         {/* Home page (with Navbar & Footer) */}
         <Route path="/home" element={
           <>
