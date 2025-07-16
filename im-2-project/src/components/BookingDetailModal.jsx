@@ -33,12 +33,12 @@ export default function BookingDetailModal({ booking, isOpen, onClose }) {
             </div>
             <div className="section">
               <FaMoneyBillWave />
-<span>
-  ₱{(
-    (b.car_price || 0) *
-    (Math.ceil((new Date(b.end_date) - new Date(b.start_date)) / (1000 * 60 * 60 * 24)) || 1)
-  ).toFixed(2)}
-</span>
+              <span>
+                ₱{(
+                  (booking.car_price || 0) *
+                  (Math.ceil((new Date(booking.end_date) - new Date(booking.start_date)) / (1000 * 60 * 60 * 24)) || 1)
+                ).toFixed(2)}
+              </span>
             </div>
             <div className="section">
               <strong>Status:</strong> {booking.booking_status}

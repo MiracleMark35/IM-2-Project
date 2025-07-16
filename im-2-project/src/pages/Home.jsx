@@ -24,7 +24,7 @@ const slides = [
 const Home = () => {
   
 
-  const navigate = useNavigate(); // ✅ Place this FIRST
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const id = localStorage.getItem('id');
@@ -183,10 +183,17 @@ const Home = () => {
         </div>
         {error && <p className="error-message">{error}</p>}
         <div className="action-buttons">
-          <button className="action-btn">View Available Cars</button>
-          <button className="action-btn">Check Application Status</button>
-        </div>
+  <button className="action-btn" onClick={() => navigate('/rentals')}>
+    View Available Cars
+  </button>
+  <button className="action-btn" onClick={() => navigate('/booking')}>
+    Check Bookings Status
+  </button>
+</div>
       </div>
+
+
+
 
       <button className="scroll-down-btn" onClick={scrollToSecondSection} aria-label="Scroll down">
         <FaArrowDown />

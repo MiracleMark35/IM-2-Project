@@ -1,17 +1,50 @@
+import './footer.css';
+import {
+  FaFacebook,
+  FaInstagram,
+  FaTwitter,
+} from 'react-icons/fa';
+
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300 py-6 w-full mt-auto">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="text-sm mb-4 md:mb-0 text-center md:text-left">
-            © {new Date().getFullYear()} <span className="font-bold text-white">MC. IE Car Rentals</span>. All rights reserved.
-          </div>
-          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
-            <a href="#" className="hover:text-white transition">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition">Terms of Service</a>
-            <a href="mailto:mc.ie.rentals@example.com" className="hover:text-white transition">Contact Us</a>
+    <footer className="footer">
+      <div className="footer-container">
+        <div className="footer-section">
+          <h2 className="footer-logo">MC. IE Car Rentals</h2>
+          <p className="footer-tagline">Experience rides like never before.</p>
+          <button className="footer-button">Subscribe Newsletter</button>
+        </div>
+
+        <div className="footer-section">
+          <h3 className="footer-heading">Quick Links</h3>
+          <ul className="footer-links">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/featured">Featured</a></li>
+            <li><a href="/rentals">Rentals</a></li>
+            <li><a href="/aboutus">About Us</a></li>
+          </ul>
+        </div>
+
+        <div className="footer-section">
+          <h3 className="footer-heading">Contact Us</h3>
+          <p>Email: <a href="mailto:info@mcierentals.com">info@mcierentals.com</a></p>
+          <p>Phone: <a href="tel:+123456789">+1 234 567 89</a></p>
+          <p>Address: Cebu City, Philippines</p>
+        </div>
+
+        <div className="footer-section">
+          <h3 className="footer-heading">Follow Us</h3>
+          <div className="footer-socials">
+            <a href="#"><FaFacebook size={20} /></a>
+            <a href="#"><FaInstagram size={20} /></a>
+            <a href="#"><FaTwitter size={20} /></a>
           </div>
         </div>
+      </div>
+
+      <div className="footer-bottom">
+        © {new Date().getFullYear()} <strong>MC. IE Car Rentals</strong>. All rights reserved.
+        <a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a>
       </div>
     </footer>
   );

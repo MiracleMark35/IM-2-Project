@@ -67,7 +67,7 @@ export default function FilterDropdownButton({
       {open && (
         <div className="filter-modal-backdrop" onClick={handleBackdropClick}>
           <div className="filter-modal">
-            <div className="filter-modal-title">Sort by:</div>
+            <div className="filter-modal-title">Filters:</div>
 
             <div className="filter-group">
             <div className="filter-label-row">

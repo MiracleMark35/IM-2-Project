@@ -37,7 +37,7 @@ const Profile = () => {
 
   if (!user) return <p>Loading...</p>;
 
-  const fullName = 'Mark Ian F.'; // Replace with real name if stored
+  const fullName = 'Mark Ian F.';
 
   return (
     <div className="profile-container">

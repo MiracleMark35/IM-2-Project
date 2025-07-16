@@ -35,14 +35,14 @@ const [selectedCategory, setSelectedCategory] = useState(defaultType.toUpperCase
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ location: 'main_branch' }) // adjust if needed
+        body: JSON.stringify({ location: 'main_branch' })
       });
 
       const result = await response.json();
 
       if (result.status === 'success') {
         setVehicles(result.cars);
-        localStorage.setItem('availableCars', JSON.stringify(result.cars)); // optional cache
+        localStorage.setItem('availableCars', JSON.stringify(result.cars)); 
       } else {
         console.error('Fetch failed:', result.message);
       }
@@ -70,7 +70,7 @@ const [selectedCategory, setSelectedCategory] = useState(defaultType.toUpperCase
   .sort((a, b) => {
     if (filters.sortBy === 'price: low to high') return a.price - b.price;
     if (filters.sortBy === 'high to low') return b.price - a.price;
-    return 0; // Default to Relevance (no sorting)
+    return 0;
   });
 
   return (
@@ -102,8 +102,8 @@ const [selectedCategory, setSelectedCategory] = useState(defaultType.toUpperCase
         plate_number: vehicle.plate_number,
         category: vehicle.type,
         price: `₱${vehicle.price}`,
-         transmission: vehicle.transmission,   // ✅ add this
-    fuel_type: vehicle.fuel_type,         // ✅ add this
+         transmission: vehicle.transmission, 
+    fuel_type: vehicle.fuel_type,      
     seats: vehicle.seats,      
         frequency: 'Per day',
        image: `http://localhost/car-rental-api/uploads/cars/${vehicle.image_path}`

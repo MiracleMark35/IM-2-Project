@@ -1,44 +1,102 @@
+/* Full screen container with center alignment and background */
 .register-container {
   height: 100vh;
+  width: 100vw;
+  background: linear-gradient(to bottom right, #f1e4d2, #e6d3bc);
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f1e4d2;
+  padding: 1rem;
+  position: relative;
 }
 
+/* Optional: Overlay for darkening background if you add an image later */
+.register-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 0;
+}
+
+/* Box styling */
 .register-box {
+  position: relative;
+  z-index: 1;
   background-color: #6d4d2d;
-  padding: 40px;
-  border-radius: 20px;
-  width: 360px;
+  padding: 3rem 2rem;
+  border-radius: 18px;
+  width: 100%;
+  max-width: 400px;
   color: #f9d69e;
-  box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 1.2rem;
+  text-align: center;
 }
 
+/* Title */
+.register-box h2 {
+  font-size: 1.8rem;
+  color: #fff8ec;
+  margin-bottom: 0.5rem;
+}
+
+/* Inputs */
 .register-box input {
-  padding: 12px;
-  border-radius: 6px;
-  border: none;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #d3c5b9;
   font-size: 14px;
+  background-color: #fff;
+  color: #333;
   outline: none;
+  transition: border-color 0.3s ease;
 }
 
+.register-box input:focus {
+  border-color: #a67c52;
+}
+
+/* Button */
 .register-box button {
   background-color: #d3c5b9;
   border: none;
-  padding: 10px;
-  border-radius: 12px;
-  font-size: 14px;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 15px;
   font-weight: bold;
+  color: #3e2c1c;
   cursor: pointer;
-  color: #2a174d;
+  transition: background-color 0.3s ease;
 }
 
+.register-box button:hover {
+  background-color: #e8dacc;
+}
+
+/* Error message */
 .register-box .error {
-  color: #ffaaa5;
+  color: #ffb3ab;
   font-size: 13px;
   margin-top: -8px;
+  text-align: left;
+}
+
+/* Register link */
+.register-box p {
+  font-size: 13px;
+  color: #fcecd8;
+  margin-top: 1rem;
+}
+
+.register-box a {
+  color: #fcecd8;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.register-box a:hover {
+  text-decoration: underline;
 }

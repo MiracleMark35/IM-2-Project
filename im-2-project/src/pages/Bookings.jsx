@@ -83,7 +83,7 @@ export default function Bookings() {
 
       {!filtered.length ? (
         <div className="no-bookings-card">
-          <img src="/images/no-bookings.svg" alt="No bookings" />
+         
           <h2>No {activeTab === 'current' ? 'current' : 'past'} bookings</h2>
           <p>
             {activeTab === 'current'

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../api/apiConfig';
-import '../styles/Login.css'; // This must point to the actual CSS file
+import '../styles/Login.css'; 
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -26,7 +26,7 @@ const Login = () => {
 
     if (!response.ok) throw new Error(data.error || 'Login failed');
 
-    // Store user data in localStorage
+   
     localStorage.setItem('id', data.user.id || '');
     localStorage.setItem('userFullName', data.user.fullName || '');
     localStorage.setItem('userEmail', data.user.email || '');
@@ -42,7 +42,8 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="login-box">
-        <h2>Login</h2>
+
+       <h2 className="login-title">Welcome Back</h2>
         <input
           type="email"
           placeholder="Email"

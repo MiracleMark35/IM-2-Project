@@ -26,14 +26,17 @@
     color: #52402C;
 }
 
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
 .navbar-links {
     display: flex;
     gap: 2rem;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    align-items: center;
 }
-
 .navbar-links a {
     text-decoration: none;
     color: #52402C;

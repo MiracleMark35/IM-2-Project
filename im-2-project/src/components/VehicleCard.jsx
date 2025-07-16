@@ -39,7 +39,7 @@ export default function VehicleCard({ vehicle, onRentClick, onDetailClick }) {
         </div>
         <div className="vehicle-card-footer">
           <p className="vehicle-price">
-            ₱{vehicle.price}
+            {vehicle.price}
             <span className="vehicle-price-frequency"> /day</span>
           </p>
         </div>
