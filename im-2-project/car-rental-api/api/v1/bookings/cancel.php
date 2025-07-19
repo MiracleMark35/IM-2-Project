@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     header("Access-Control-Allow-Headers: Content-Type");
     exit(0);
 }
-
+//pls canle
 require_once '../../config.php';
 
 // Get JSON body
