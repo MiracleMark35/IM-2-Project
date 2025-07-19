@@ -1,102 +1,158 @@
-/* Full screen container with center alignment and background */
+/* Full screen container with center alignment and soft gradient background */
 .register-container {
   height: 100vh;
   width: 100vw;
-  background: linear-gradient(to bottom right, #f1e4d2, #e6d3bc);
+  background: linear-gradient(135deg, #f9f1e7, #d9c8b5);
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 1rem;
   position: relative;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Optional: Overlay for darkening background if you add an image later */
+/* Optional subtle overlay for depth */
 .register-container::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.1);
   z-index: 0;
+  border-radius: 24px;
 }
 
-/* Box styling */
+/* Form box styling */
 .register-box {
   position: relative;
   z-index: 1;
   background-color: #6d4d2d;
-  padding: 3rem 2rem;
-  border-radius: 18px;
+  border-radius: 24px;
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
   color: #f9d69e;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 1.6rem;
   text-align: center;
+  transition: transform 0.3s ease;
+  padding: 10.5rem 2.5rem; /* reduced height */
+}
+.register-box:hover {
+  transform: translateY(-5px);
 }
 
 /* Title */
 .register-box h2 {
-  font-size: 1.8rem;
+  font-size: 2.2rem;
+  font-weight: 700;
   color: #fff8ec;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.06em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 /* Inputs */
 .register-box input {
-  padding: 12px 14px;
-  border-radius: 8px;
-  border: 1px solid #d3c5b9;
-  font-size: 14px;
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1.5px solid #d3c5b9;
+  font-size: 16px;
   background-color: #fff;
-  color: #333;
+  color: #3a2f1a;
   outline: none;
-  transition: border-color 0.3s ease;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  font-weight: 600;
+  font-family: inherit;
+}
+
+.register-box input::placeholder {
+  color: #b19f84;
+  font-weight: 500;
 }
 
 .register-box input:focus {
   border-color: #a67c52;
+  box-shadow: 0 0 6px 2px #a67c52aa;
+}
+
+/* Date label and input container */
+.date-input-container {
+  text-align: left;
+  color: #f9d69e;
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 0.5rem;
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.04em;
 }
 
 /* Button */
 .register-box button {
-  background-color: #d3c5b9;
+  background: linear-gradient(135deg, #d3c5b9, #a67c52);
   border: none;
-  padding: 12px;
-  border-radius: 8px;
-  font-size: 15px;
-  font-weight: bold;
+  padding: 14px 0;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 700;
   color: #3e2c1c;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  box-shadow: 0 5px 15px #9a7545cc;
+  transition: background 0.3s ease, transform 0.2s ease;
+  user-select: none;
 }
 
 .register-box button:hover {
-  background-color: #e8dacc;
+  background: linear-gradient(135deg, #e8dacc, #b9945a);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px #b29254cc;
 }
 
 /* Error message */
 .register-box .error {
-  color: #ffb3ab;
-  font-size: 13px;
+  color: #ff6b6b;
+  font-size: 14px;
   margin-top: -8px;
   text-align: left;
+  font-weight: 600;
+  letter-spacing: 0.03em;
 }
 
-/* Register link */
+/* Login link */
 .register-box p {
-  font-size: 13px;
-  color: #fcecd8;
-  margin-top: 1rem;
+  font-size: 14px;
+  color: #fcecd8cc;
+  margin-top: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
 .register-box a {
   color: #fcecd8;
-  font-weight: bold;
+  font-weight: 700;
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 .register-box a:hover {
+  color: #fff;
   text-decoration: underline;
+}
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+  .register-box {
+    padding: 2.5rem 1.5rem;
+    max-width: 100%;
+  }
+
+  .register-box h2 {
+    font-size: 1.8rem;
+  }
+
+  .register-box button {
+    font-size: 16px;
+  }
 }

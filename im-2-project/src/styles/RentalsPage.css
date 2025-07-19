@@ -10,6 +10,14 @@
   padding-right: 16px; /* 1rem */
 }
 
+
+.vehicle-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+  gap: 2rem;
+  padding: 2rem;
+}
+
 /* Responsive padding for larger screens */
 @media (min-width: 640px) {
   .rentals-page {

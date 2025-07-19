@@ -84,13 +84,6 @@ export default function RentalsPage() {
             selectedType={selectedCategory}
             setSelectedType={setSelectedCategory}
           />
-
-          <select value={selectedCategory} onChange={e => setSelectedCategory(e.target.value)}>
-            {['ALL', ...[...new Set(vehicles.map(v => v.type))].map(t => t.toUpperCase())].map(c => (
-              <option key={c} value={c}>{c}</option>
-            ))}
-          </select>
-
           <FilterDropdownButton filters={filters} setFilters={setFilters} />
         </div>
 
