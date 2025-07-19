@@ -1,0 +1,77 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.booking-detail-modal {
+  background: #fff8f0;
+  border-radius: 16px;
+  padding: 30px;
+  width: 800px;
+  max-width: 95%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.booking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.price {
+  font-size: 22px;
+  color: #aa8855;
+}
+
+.modal-body {
+  display: flex;
+  gap: 30px;
+}
+
+.left-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 16px;
+}
+
+.right-image {
+  flex: 1;
+  text-align: center;
+}
+
+.right-image img {
+  width: 100%;
+  max-height: 250px;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.specs {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-around;
+  color: #333;
+}

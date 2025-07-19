@@ -1,0 +1,153 @@
+.profile-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.profile-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 1.5rem;
+}
+
+.profile-photo img {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #d2a14d;
+  background-color: #f3f3f3;
+}
+
+.profile-photo input {
+  margin-top: 0.5rem;
+}
+
+.profile-photo button {
+  margin-top: 0.5rem;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  border: none;
+  background-color: #6b5c4d;
+  color: white;
+  cursor: pointer;
+}
+
+.profile-info h2 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.profile-info p {
+  margin-top: 0.4rem;
+  color: #777;
+  font-size: 0.95rem;
+}
+
+.profile-edit-section {
+  margin-bottom: 2rem;
+}
+
+.profile-edit-section h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #444;
+}
+
+.input-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.input-row label {
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  color: #555;
+}
+
+.input-row input,
+.input-row textarea {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.profile-edit-section button {
+  background-color: #d2a14d;
+  color: white;
+  padding: 10px 16px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background 0.3s;
+}
+
+.profile-edit-section button:hover {
+  background-color: #b88d3b;
+}
+
+.profile-verification,
+.profile-reviews {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.profile-verification h3,
+.profile-reviews h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #444;
+}
+
+.profile-verification ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.profile-verification li {
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+.profile-verification button {
+  margin-left: 10px;
+  padding: 4px 10px;
+  font-size: 0.9rem;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.tip-text {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 1rem;
+}
+.license-preview {
+  margin-top: 8px;
+  max-width: 300px;
+  height: auto;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+}

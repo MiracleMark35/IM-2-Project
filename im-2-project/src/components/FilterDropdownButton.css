@@ -1,0 +1,206 @@
+.filter-dropdown-btn {
+  background: #fff;
+  color: #6b5c4d;
+  border: 2px solid #d2a14d;
+  border-radius: 12px;
+  padding: 10px 32px 10px 16px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-left: 16px;
+  cursor: pointer;
+  position: relative;
+  transition: border 0.2s;
+  display: inline-flex;
+  align-items: center;
+  min-width: 180px;
+  justify-content: space-between;
+}
+
+.filter-dropdown-btn:focus,
+.filter-dropdown-btn:hover {
+  border: 2px solid #bf8624;
+}
+
+.filter-dropdown-arrow {
+  margin-left: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.filter-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(78, 60, 46, 0.6);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-modal {
+  background: #EDE3D5;
+  border-radius: 20px;  
+  padding: 36px 40px 28px 40px;
+  min-width: 420px;
+  max-width: 95vw;
+  max-height: 80vh; /* Limit height to allow scrolling */
+  overflow-y: auto;  /* Enable vertical scroll */
+  scrollbar-width: none; /* Firefox: hide scrollbar */
+  -ms-overflow-style: none;  /* IE and Edge */
+
+  box-shadow: 0 8px 32px rgba(80, 60, 40, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Chrome, Safari and others */
+.filter-modal::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-modal-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #6b5c4d;
+  margin-bottom: 8px;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+  color: #6b5c4d;
+  font-size: 1rem;
+}
+
+.filter-reset {
+  background: none;
+  border: none;
+  color: #b08a3e;
+  font-size: 0.98rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.filter-reset:hover {
+  color: #d2a14d;
+}
+
+.filter-select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.filter-select-wrapper select {
+  width: 100%;
+  padding: 12px 44px 12px 16px;
+  border-radius: 12px;
+  border: none;
+  background: #937B60;
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 500;
+  appearance: none;
+  outline: none;
+}
+
+.filter-select-arrow {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.filter-eco-options {
+  display: flex;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.filter-eco-btn {
+  background: none;
+  border: 2px solid #b08a3e;
+  color: #b08a3e;
+  border-radius: 12px;
+  padding: 10px 28px;
+  font-size: 1.05rem;
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.2s, color 0.2s, border 0.2s;
+}
+
+.filter-eco-btn.selected {
+  background: #fff;
+  color: #6b5c4d;
+  border: 2px solid #d2a14d;
+  box-shadow: 0 0 0 2px #d2a14d33;
+}
+
+.filter-eco-check {
+  color: #b08a3e;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.filter-modal-actions {
+  display: flex;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.filter-reset-all {
+  flex: 1;
+  background: #fff;
+  color: #6b5c4d;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 0;
+  font-size: 1.08rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.filter-reset-all:hover {
+  background: #b19a7f;
+}
+
+.filter-apply {
+  flex: 1;
+  background: #3e2b04;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 0;
+  font-size: 1.08rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.filter-apply:hover {
+  background: #43310d;
+}
+
+.filter-apply-count {
+  font-weight: 600;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 0.98rem;
+}
