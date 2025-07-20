@@ -4,6 +4,7 @@ import '../styles/Profile.css';
 import { API_BASE_URL } from '../api/apiConfig';
 import defaultAvatar from '../assets/Images/default-avatar.jpg';
 import VerifyDriverModal from '../components/VerifyDriverModal';
+import PendingVerificationView from '../components/PendingVerificationView';
 
 
 
@@ -13,16 +14,31 @@ const Profile = () => {
   const [isSaving, setIsSaving] = useState(false);
   const [showVerifyModal, setShowVerifyModal] = useState(false);
   const userId = localStorage.getItem('id');
+ const [hasPendingApplication, setHasPendingApplication] = useState(false);
+ const [showPendingView, setShowPendingView] = useState(false);
+
 
   useEffect(() => {
-    fetch(`${API_BASE_URL}/auth/fetch_user.php?id=${userId}`)
-      .then(res => res.json())
-      .then(setUser)
-      .catch(err => console.error(err));
+  // Fetch user profile info
+  fetch(`${API_BASE_URL}/auth/fetch_user.php?id=${userId}`)
+    .then(res => res.json())
+    .then(setUser)
+    .catch(err => console.error(err));
 
-  
-
-  }, []);
+  // Check if the user has submitted a verification application
+  fetch(`${API_BASE_URL}/auth/fetch_user_application_form.php?user_id=${userId}`)
+    .then(async (res) => {
+      if (!res.ok) {
+        setHasPendingApplication(false);
+        return;
+      }
+      const data = await res.json();
+      setHasPendingApplication(data && Object.keys(data).length > 0);
+    })
+    .catch(() => {
+      setHasPendingApplication(false);
+    });
+}, []);
 
   const handlePhotoChange = (e) => {
     setPhoto(e.target.files[0]);
@@ -119,9 +135,7 @@ const Profile = () => {
           </div>
         )}
 
-        <button onClick={() => setShowVerifyModal(true)}>
-          {user.license_image || user.secondary_id_image ? 'Update Verification Info' : 'Submit Verification Info'}
-        </button>
+  
 
         <div className="input-row">
           <label>Address</label>
@@ -132,20 +146,34 @@ const Profile = () => {
           {isSaving ? 'Saving...' : 'Save Changes'}
         </button>
       </div>
-
-      <div className="profile-verification">
-        <h3>Verified Info</h3>
-        <ul>
-          <li>✅ Email address</li>
-          <li>Phone number — {user.mobile ? 'Verified' : <button>Verify phone</button>}</li>
-          <li>
-            🪪 Approved to drive — {user.status === 'verified' ? '✅' : (
-              <button onClick={() => setShowVerifyModal(true)}>Verify ID</button>
-            )}
-          </li>
-        </ul>
-        <p className="tip-text">Build trust with others by verifying your contact details.</p>
-      </div>
+<div className="profile-verification">
+  <h3>Verified Info</h3>
+  <ul>
+    <li>✅ Email address</li>
+    <li>Phone number — {user.mobile ? 'Verified' : <button>Verify phone</button>}</li>
+   <li>
+  🪪 Approved to drive — {
+    user.status === 'verified' ? '✅' :
+    hasPendingApplication ? '🕒 Pending' :
+    <button onClick={() => setShowVerifyModal(true)}>Verify ID</button>
+  }
+</li>
+  </ul>
+  <p className="tip-text">Build trust with others by verifying your contact details.</p>
+</div>
+{user.status !== 'verified' && hasPendingApplication && (
+  <div className="profile-pending-application">
+    <button onClick={() => setShowPendingView(true)}>View Your Submitted Application</button>
+    <button onClick={() => {
+      const confirm = window.confirm("Are you sure you want to submit a new application? This will replace your previous one.");
+      if (confirm) {
+        setShowVerifyModal(true); // Opens modal for new submission
+      }
+    }}>
+      Submit New Application
+    </button>
+  </div>
+)}
 
       {showVerifyModal && (
         <VerifyDriverModal
@@ -159,6 +187,14 @@ const Profile = () => {
         />
       )}
       
+
+{showPendingView && (
+  <PendingVerificationView
+    userId={userId}
+    onClose={() => setShowPendingView(false)}
+  />
+)}
+
     </div>
   );
 };

@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // Collect input data
-$user_id = $_POST['id'] ?? null;
+$user_id = $_POST['user_id'] ?? null;
 $mobile = $_POST['mobile'] ?? '';
 $license_number = $_POST['license_number'] ?? '';
 $address = $_POST['address'] ?? '';

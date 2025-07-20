@@ -10,52 +10,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit();
 }
 
-// DB connection
-include_once __DIR__ . '/../../config.php';  // Adjust path if needed
+// Include database connection config
+include_once __DIR__ . '/../../config.php';
 
 // Get user ID from query string
-$id = $_GET['id'] ?? null;
+$userId = $_GET['user_id'] ?? null;
 
-if (!$id) {
+if (!$userId) {
     http_response_code(400);
     echo json_encode(['error' => 'User ID is required']);
     exit();
 }
 
 try {
-    // Fetch user + verification-related fields
+    // Fetch driver verification application data from driver_verifications table
     $stmt = $conn->prepare("
         SELECT 
-            id, 
-            email, 
-            mobile, 
-            address, 
-            balance, 
-            status, 
-            profile_photo, 
-            secondary_id_image, 
-            license_image, 
+            user_id,
             license_number,
-            created_at, 
-            verified_at, 
-            first_name, 
-            middle_name, 
-            last_name, 
-            date_of_birth
-        FROM users 
-        WHERE id = :id
+            license_image,
+            secondary_id_image,
+            profile_photo,
+            mobile,
+            address,
+            created_at,
+            status
+        FROM driver_verifications
+        WHERE user_id = :user_id
     ");
 
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
     $stmt->execute();
 
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    $verification = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($user) {
-        echo json_encode($user);
+    if ($verification) {
+        echo json_encode($verification);
     } else {
         http_response_code(404);
-        echo json_encode(['error' => 'User not found']);
+        echo json_encode(['error' => 'No pending verification found']);
     }
 
 } catch (PDOException $e) {
