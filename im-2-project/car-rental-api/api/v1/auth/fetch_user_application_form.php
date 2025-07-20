@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // DB connection
-include_once __DIR__ . '/../../config.php';
+include_once __DIR__ . '/../../config.php';  // Adjust path if needed
 
 // Get user ID from query string
 $id = $_GET['id'] ?? null;
@@ -23,7 +23,7 @@ if (!$id) {
 }
 
 try {
-    // Include license_number in the SELECT query
+    // Fetch user + verification-related fields
     $stmt = $conn->prepare("
         SELECT 
             id, 

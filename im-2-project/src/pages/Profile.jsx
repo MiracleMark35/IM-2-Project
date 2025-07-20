@@ -1,8 +1,11 @@
+// src/pages/Profile.jsx
 import React, { useEffect, useState } from 'react';
 import '../styles/Profile.css';
 import { API_BASE_URL } from '../api/apiConfig';
 import defaultAvatar from '../assets/Images/default-avatar.jpg';
 import VerifyDriverModal from '../components/VerifyDriverModal';
+
+
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -10,47 +13,15 @@ const Profile = () => {
   const [isSaving, setIsSaving] = useState(false);
   const [showVerifyModal, setShowVerifyModal] = useState(false);
   const userId = localStorage.getItem('id');
-const [secondaryIdImage, setSecondaryIdImage] = useState(null);
-
-const handleSecondaryIdChange = (e) => {
-  setSecondaryIdImage(e.target.files[0]);
-};
-
-
-const handleLicenseUpload = async () => {
-  const formData = new FormData();
-  formData.append('id', userId);
-  formData.append('license_image', user.license_image_file);
-
-  const res = await fetch(`${API_BASE_URL}/auth/upload_license.php`, {
-    method: 'POST',
-    body: formData
-  });
-
-  const result = await res.json();
-  alert(result.message || 'Uploaded driver’s license');
-  window.location.reload();
-};
-
-const handleSecondaryIdUpload = async () => {
-  const formData = new FormData();
-  formData.append('id', userId);
-  formData.append('secondary_id_image', secondaryIdImage);
-
-  const res = await fetch(`${API_BASE_URL}/auth/upload_secondary_id.php`, {
-    method: 'POST',
-    body: formData,
-  });
-  const result = await res.json();
-  alert(result.message || 'Uploaded secondary ID');
-  window.location.reload();
-};
 
   useEffect(() => {
     fetch(`${API_BASE_URL}/auth/fetch_user.php?id=${userId}`)
       .then(res => res.json())
       .then(setUser)
       .catch(err => console.error(err));
+
+  
+
   }, []);
 
   const handlePhotoChange = (e) => {
@@ -77,27 +48,22 @@ const handleSecondaryIdUpload = async () => {
   };
 
   const handleSaveChanges = async () => {
-  setIsSaving(true);
+    setIsSaving(true);
+    const formData = new FormData();
+    formData.append('id', userId);
+    formData.append('mobile', user.mobile || '');
+    formData.append('address', user.address || '');
 
-  const formData = new FormData();
-  formData.append('id', userId);
-  formData.append('mobile', user.mobile || '');
-  formData.append('address', user.address || '');
+    const res = await fetch(`${API_BASE_URL}/auth/update_user.php`, {
+      method: 'POST',
+      body: formData
+    });
 
-  if (user.license_image_file) {
-    formData.append('license_image', user.license_image_file);
-  }
-
-  const res = await fetch(`${API_BASE_URL}/auth/update_user.php`, {
-    method: 'POST',
-    body: formData
-  });
-
-  const result = await res.json();
-  alert(result.message || 'Updated');
-  setIsSaving(false);
-  window.location.reload();
-};
+    const result = await res.json();
+    alert(result.message || 'Updated');
+    setIsSaving(false);
+    window.location.reload();
+  };
 
   if (!user) return <p>Loading...</p>;
 
@@ -122,55 +88,40 @@ const handleSecondaryIdUpload = async () => {
 
       <div className="profile-edit-section">
         <h3>Account Info</h3>
-
         <div className="input-row">
           <label>Email</label>
           <input type="email" value={user.email || ''} disabled />
         </div>
-
         <div className="input-row">
           <label>Mobile</label>
           <input name="mobile" value={user.mobile || ''} onChange={handleInputChange} />
         </div>
-<div className="input-row">
-  <label>Driver’s License (Image Only)</label>
-  {user.license_image ? (
-    <img
-     src={`http://localhost/car-rental-api/api/uploads/${user.license_image}`}
-      alt="License"
-      className="license-preview"
-    />
-  ) : (
-    <p>No license uploaded</p>
-  )}
-  <input
-    type="file"
-    accept="image/*"
-    onChange={(e) =>
-      setUser((prev) => ({ ...prev, license_image_file: e.target.files[0] }))
-    }
-  />
-  <button onClick={handleLicenseUpload} disabled={!user.license_image_file}>
-    Upload License
-  </button>
-</div>
-{user.secondary_id_image && (
-  <div className="input-row">
-    <label>Uploaded ID:</label>
-    <img  
-      src={`http://localhost/car-rental-api/api/uploads/${user.secondary_id_image}`}
-      alt="Secondary ID"
-      style={{ width: '200px', borderRadius: '8px' }}
-    />
-  </div>
-)}
-  
-<div className="input-row">
-  <label>Upload Secondary ID</label>
-  <input type="file" onChange={handleSecondaryIdChange} />
-  <button onClick={handleSecondaryIdUpload} disabled={!secondaryIdImage}>Upload</button>
-</div>
 
+        {user.license_image && (
+          <div className="input-row">
+            <label>Driver’s License</label>
+            <img
+              src={`http://localhost/car-rental-api/api/uploads/${user.license_image}`}
+              alt="License"
+              className="license-preview"
+            />
+          </div>
+        )}
+
+        {user.secondary_id_image && (
+          <div className="input-row">
+            <label>Secondary ID</label>
+            <img
+              src={`http://localhost/car-rental-api/api/uploads/${user.secondary_id_image}`}
+              alt="Secondary ID"
+              className="license-preview"
+            />
+          </div>
+        )}
+
+        <button onClick={() => setShowVerifyModal(true)}>
+          {user.license_image || user.secondary_id_image ? 'Update Verification Info' : 'Submit Verification Info'}
+        </button>
 
         <div className="input-row">
           <label>Address</label>
@@ -186,9 +137,7 @@ const handleSecondaryIdUpload = async () => {
         <h3>Verified Info</h3>
         <ul>
           <li>✅ Email address</li>
-          <li>
-            Phone number — {user.mobile ? 'Verified' : <button>Verify phone</button>}
-          </li>
+          <li>Phone number — {user.mobile ? 'Verified' : <button>Verify phone</button>}</li>
           <li>
             🪪 Approved to drive — {user.status === 'verified' ? '✅' : (
               <button onClick={() => setShowVerifyModal(true)}>Verify ID</button>
@@ -209,6 +158,7 @@ const handleSecondaryIdUpload = async () => {
           }}
         />
       )}
+      
     </div>
   );
 };
